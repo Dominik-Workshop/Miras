@@ -19642,9 +19642,9 @@ uart</text>
 <label x="-71.12" y="-12.7" size="1.016" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PB13"/>
-<wire x1="-2.54" y1="-17.78" x2="-5.08" y2="-17.78" width="0.1524" layer="91"/>
-<label x="-5.08" y="-17.78" size="1.016" layer="95" rot="R180" xref="yes"/>
+<wire x1="-2.54" y1="-38.1" x2="-5.08" y2="-38.1" width="0.1524" layer="91"/>
+<label x="-5.08" y="-38.1" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PC5"/>
 </segment>
 </net>
 <net name="G6" class="0">
@@ -20207,9 +20207,9 @@ uart</text>
 <junction x="-144.78" y="48.26"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PA7"/>
-<wire x1="-2.54" y1="38.1" x2="-5.08" y2="38.1" width="0.1524" layer="91"/>
-<label x="-5.08" y="38.1" size="1.016" layer="95" rot="R180" xref="yes"/>
+<wire x1="-2.54" y1="40.64" x2="-5.08" y2="40.64" width="0.1524" layer="91"/>
+<label x="-5.08" y="40.64" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PA6"/>
 </segment>
 </net>
 <net name="L_PWM" class="0">
