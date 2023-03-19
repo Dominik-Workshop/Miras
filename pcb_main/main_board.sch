@@ -17378,108 +17378,6 @@ Source: AVX .. aphvc.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="transistor-fet" urn="urn:adsk.eagle:library:396">
-<description>&lt;b&gt;Field Effect Transistors&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;p&gt;
-&lt;p&gt;
-Symbols changed according to IEC617&lt;p&gt; 
-All types, packages and assignment to symbols and pins checked&lt;p&gt;
-Package outlines partly checked&lt;p&gt;
-&lt;p&gt;
-JFET = junction FET&lt;p&gt;
-IGBT-x = insulated gate bipolar transistor&lt;p&gt;
-x=N: NPN; x=P: PNP&lt;p&gt;
-IGFET-mc-nnn; (IGFET=insulated gate field effect transistor)&lt;P&gt;
-m=D: depletion mode (Verdr&amp;auml;ngungstyp)&lt;p&gt;
-m=E: enhancement mode (Anreicherungstyp)&lt;p&gt;
-c: N=N-channel; P=P-Channel&lt;p&gt;
-GDSB: gate, drain, source, bulk&lt;p&gt;
-&lt;p&gt;
-by R. Vogg  15.March.2002</description>
-<packages>
-<package name="SO-8" urn="urn:adsk.eagle:footprint:28473/1" library_version="5">
-<description>&lt;b&gt;SO 8 small outline&lt;/b&gt;</description>
-<wire x1="-1.8034" y1="2.3622" x2="-1.8034" y2="-2.3622" width="0.127" layer="21"/>
-<wire x1="-1.8034" y1="-2.3622" x2="1.8034" y2="-2.3622" width="0.127" layer="21"/>
-<wire x1="1.8034" y1="-2.3622" x2="1.8034" y2="2.3622" width="0.127" layer="21"/>
-<wire x1="1.8034" y1="2.3622" x2="-1.8034" y2="2.3622" width="0.127" layer="21"/>
-<circle x="-1.2446" y="1.8034" radius="0.3556" width="0.0508" layer="21"/>
-<smd name="1" x="-2.7432" y="1.905" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="8" x="2.7432" y="1.905" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="2" x="-2.7432" y="0.635" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="3" x="-2.7432" y="-0.635" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="7" x="2.7432" y="0.635" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="6" x="2.7432" y="-0.635" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="4" x="-2.7432" y="-1.905" dx="1.524" dy="0.6096" layer="1"/>
-<smd name="5" x="2.7432" y="-1.905" dx="1.524" dy="0.6096" layer="1"/>
-<text x="-2.032" y="-4.0005" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-2.032" y="2.7305" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="0.762" y="1.143" size="1.016" layer="21" ratio="10">8</text>
-<rectangle x1="-2.8702" y1="1.7272" x2="-1.8542" y2="2.0828" layer="51"/>
-<rectangle x1="-2.8702" y1="0.4572" x2="-1.8542" y2="0.8128" layer="51"/>
-<rectangle x1="-2.8702" y1="-0.8128" x2="-1.8542" y2="-0.4572" layer="51"/>
-<rectangle x1="-2.8702" y1="-2.0828" x2="-1.8542" y2="-1.7272" layer="51"/>
-<rectangle x1="1.8542" y1="1.7272" x2="2.8702" y2="2.0828" layer="51"/>
-<rectangle x1="1.8542" y1="0.4572" x2="2.8702" y2="0.8128" layer="51"/>
-<rectangle x1="1.8542" y1="-0.8128" x2="2.8702" y2="-0.4572" layer="51"/>
-<rectangle x1="1.8542" y1="-2.0828" x2="2.8702" y2="-1.7272" layer="51"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="SO-8" urn="urn:adsk.eagle:package:28532/2" type="model" library_version="5">
-<description>SO 8 small outline</description>
-<packageinstances>
-<packageinstance name="SO-8"/>
-</packageinstances>
-</package3d>
-</packages3d>
-<symbols>
-<symbol name="IGFET-EN-GDS" urn="urn:adsk.eagle:symbol:28452/1" library_version="5">
-<wire x1="-2.54" y1="-2.54" x2="-1.2192" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="0" y1="0.762" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="0" y2="-0.762" width="0.254" layer="94"/>
-<wire x1="0" y1="3.683" x2="0" y2="1.397" width="0.254" layer="94"/>
-<wire x1="1.905" y1="0.635" x2="0.635" y2="0" width="0.254" layer="94"/>
-<wire x1="1.905" y1="-0.635" x2="0.635" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="0.635" y2="0" width="0.1524" layer="94"/>
-<wire x1="0.635" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="0" x2="2.54" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="0" y1="-1.397" x2="0" y2="-3.683" width="0.254" layer="94"/>
-<wire x1="-1.143" y1="2.54" x2="-1.143" y2="-2.54" width="0.254" layer="94"/>
-<text x="-11.43" y="0" size="1.778" layer="96">&gt;VALUE</text>
-<text x="-11.43" y="2.54" size="1.778" layer="95">&gt;NAME</text>
-<pin name="D" x="5.08" y="2.54" visible="off" length="middle" direction="pas" rot="R180"/>
-<pin name="S" x="5.08" y="-2.54" visible="off" length="middle" direction="pas" rot="R180"/>
-<pin name="G" x="-5.08" y="-2.54" visible="off" length="short" direction="pas"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="FDS5680" urn="urn:adsk.eagle:component:28603/3" prefix="Q" library_version="5">
-<description>&lt;b&gt;60V N-Channel PowerTrench TM MOSFET&lt;/b&gt;&lt;p&gt;
-FAIRCHILD FDS5680.pdf</description>
-<gates>
-<gate name="G$1" symbol="IGFET-EN-GDS" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SO-8">
-<connects>
-<connect gate="G$1" pin="D" pad="5 6 7 8"/>
-<connect gate="G$1" pin="G" pad="4"/>
-<connect gate="G$1" pin="S" pad="1 2 3"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:28532/2"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="POPULARITY" value="1" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="TOF_VL53L0X">
 <packages>
 <package name="TOF_VL53L0X" urn="urn:adsk.eagle:footprint:38702355/1">
@@ -20315,6 +20213,119 @@ Source: www.kingbright.com</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="transistor-power" urn="urn:adsk.eagle:library:400">
+<description>&lt;b&gt;Power Transistors&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="SO-08" urn="urn:adsk.eagle:footprint:20622/1" library_version="4">
+<description>&lt;B&gt;Small Outline Narrow Plastic Gull Wing&lt;/B&gt;&lt;p&gt;
+150-mil body, package type SN</description>
+<wire x1="-2.9" y1="3.9" x2="2.9" y2="3.9" width="0.1998" layer="39"/>
+<wire x1="2.9" y1="3.9" x2="2.9" y2="-3.9" width="0.1998" layer="39"/>
+<wire x1="2.9" y1="-3.9" x2="-2.9" y2="-3.9" width="0.1998" layer="39"/>
+<wire x1="-2.9" y1="-3.9" x2="-2.9" y2="3.9" width="0.1998" layer="39"/>
+<wire x1="2.4" y1="1.9" x2="2.4" y2="-1.4" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.4" x2="2.4" y2="-1.9" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.9" x2="-2.4" y2="-1.9" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="-1.9" x2="-2.4" y2="-1.4" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="-1.4" x2="-2.4" y2="1.9" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="1.9" x2="2.4" y2="1.9" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.4" x2="-2.4" y2="-1.4" width="0.2032" layer="51"/>
+<smd name="2" x="-0.635" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="7" x="-0.635" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="1" x="-1.905" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="3" x="0.635" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="4" x="1.905" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="8" x="-1.905" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="6" x="0.635" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="5" x="1.905" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<text x="-2.667" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="3.937" y="-1.905" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<text x="-1.905" y="-0.635" size="0.4064" layer="48">IPC SO8</text>
+<text x="-1.905" y="0.365" size="0.3048" layer="48">JEDEC MS-012 AA</text>
+<rectangle x1="-2.1501" y1="-3.1001" x2="-1.6599" y2="-2" layer="51"/>
+<rectangle x1="-0.8801" y1="-3.1001" x2="-0.3899" y2="-2" layer="51"/>
+<rectangle x1="0.3899" y1="-3.1001" x2="0.8801" y2="-2" layer="51"/>
+<rectangle x1="1.6599" y1="-3.1001" x2="2.1501" y2="-2" layer="51"/>
+<rectangle x1="1.6599" y1="2" x2="2.1501" y2="3.1001" layer="51"/>
+<rectangle x1="0.3899" y1="2" x2="0.8801" y2="3.1001" layer="51"/>
+<rectangle x1="-0.8801" y1="2" x2="-0.3899" y2="3.1001" layer="51"/>
+<rectangle x1="-2.1501" y1="2" x2="-1.6599" y2="3.1001" layer="51"/>
+<rectangle x1="-1" y1="-1" x2="1" y2="1" layer="35"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="SO-08" urn="urn:adsk.eagle:package:20804/2" type="model" library_version="4">
+<description>Small Outline Narrow Plastic Gull Wing
+150-mil body, package type SN</description>
+<packageinstances>
+<packageinstance name="SO-08"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="MFP" urn="urn:adsk.eagle:symbol:29395/1" library_version="4">
+<wire x1="-1.016" y1="2.54" x2="-1.016" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-1.905" x2="0.5334" y2="-1.905" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="-1.905" width="0.1524" layer="94"/>
+<wire x1="2.2352" y1="0" x2="2.286" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.286" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="1.905" x2="0.508" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="-1.016" y1="2.54" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="2.286" y1="0" x2="1.016" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="1.016" y1="-0.508" x2="1.016" y2="0.508" width="0.1524" layer="94"/>
+<wire x1="1.016" y1="0.508" x2="2.286" y2="0" width="0.1524" layer="94"/>
+<wire x1="1.143" y1="0" x2="0.254" y2="0" width="0.1524" layer="94"/>
+<wire x1="1.143" y1="0.254" x2="2.032" y2="0" width="0.3048" layer="94"/>
+<wire x1="2.032" y1="0" x2="1.143" y2="-0.254" width="0.3048" layer="94"/>
+<wire x1="1.143" y1="-0.254" x2="1.143" y2="0" width="0.3048" layer="94"/>
+<wire x1="1.143" y1="0" x2="1.397" y2="0" width="0.3048" layer="94"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="1.905" width="0.1524" layer="94"/>
+<circle x="2.54" y="1.905" radius="0.127" width="0.4064" layer="94"/>
+<text x="5.08" y="2.54" size="1.778" layer="95">&gt;NAME</text>
+<text x="5.08" y="0" size="1.778" layer="96">&gt;VALUE</text>
+<text x="1.397" y="-3.175" size="0.8128" layer="93">D</text>
+<text x="1.397" y="2.413" size="0.8128" layer="93">S</text>
+<text x="-2.54" y="1.397" size="0.8128" layer="93">G</text>
+<rectangle x1="-0.254" y1="1.27" x2="0.508" y2="2.54" layer="94"/>
+<rectangle x1="-0.254" y1="-2.54" x2="0.508" y2="-1.27" layer="94"/>
+<rectangle x1="-0.254" y1="-0.889" x2="0.508" y2="0.889" layer="94"/>
+<pin name="G" x="-5.08" y="2.54" visible="off" length="short" direction="pas"/>
+<pin name="D" x="2.54" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
+<pin name="S" x="2.54" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="P-MOSFET-SO8" urn="urn:adsk.eagle:component:29577/4" prefix="Q" uservalue="yes" library_version="4">
+<description>&lt;b&gt;P-Channel MOSFET&lt;/b&gt;&lt;p&gt;
+Example:&lt;br&gt;
+FDS4435A; P-Channel Logic Level PowerTrench® MOSFET&lt;br&gt;
+FDS4465; P-Channel 1.8V Specified PowerTrench® MOSFET&lt;br&gt;
+Source: www.fairchildsemi.com</description>
+<gates>
+<gate name="G$1" symbol="MFP" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SO-08">
+<connects>
+<connect gate="G$1" pin="D" pad="5 6 7 8"/>
+<connect gate="G$1" pin="G" pad="4"/>
+<connect gate="G$1" pin="S" pad="1 2 3"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:20804/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -20355,7 +20366,6 @@ Source: www.kingbright.com</description>
 <part name="P+15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="P+16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="U$7" library="D24V10F3" deviceset="D24V10F3" device="-H" override_package3d_urn="urn:adsk.eagle:package:38702809/2" override_package_urn="urn:adsk.eagle:footprint:38702810/1"/>
-<part name="Q1" library="transistor-fet" library_urn="urn:adsk.eagle:library:396" deviceset="FDS5680" device="" package3d_urn="urn:adsk.eagle:package:28532/2"/>
 <part name="U$1" library="TOF_VL53L0X" deviceset="TOF_VL53L0X" device="" package3d_urn="urn:adsk.eagle:package:38702354/2"/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
@@ -20376,7 +20386,6 @@ Source: www.kingbright.com</description>
 <part name="P+13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="BATT" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+18" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
@@ -20470,6 +20479,9 @@ Source: www.kingbright.com</description>
 <part name="R17" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="470R?"/>
 <part name="GND42" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="Q1" library="transistor-power" library_urn="urn:adsk.eagle:library:400" deviceset="P-MOSFET-SO8" device="" package3d_urn="urn:adsk.eagle:package:20804/2"/>
+<part name="P+17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="R18" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="1k"/>
 </parts>
 <sheets>
 <sheet>
@@ -20497,11 +20509,11 @@ Source: www.kingbright.com</description>
 <wire x1="-160.02" y1="-96.52" x2="-55.88" y2="-96.52" width="0.1524" layer="90" style="shortdash"/>
 <wire x1="-55.88" y1="-96.52" x2="-55.88" y2="-43.18" width="0.1524" layer="90" style="shortdash"/>
 <wire x1="-55.88" y1="-43.18" x2="-160.02" y2="-43.18" width="0.1524" layer="90" style="shortdash"/>
-<wire x1="-281.94" y1="76.2" x2="-281.94" y2="-12.7" width="0.1524" layer="90" style="shortdash"/>
-<wire x1="-281.94" y1="-12.7" x2="-165.1" y2="-12.7" width="0.1524" layer="90" style="shortdash"/>
+<wire x1="-274.32" y1="76.2" x2="-274.32" y2="-12.7" width="0.1524" layer="90" style="shortdash"/>
+<wire x1="-274.32" y1="-12.7" x2="-165.1" y2="-12.7" width="0.1524" layer="90" style="shortdash"/>
 <wire x1="-165.1" y1="-12.7" x2="-165.1" y2="76.2" width="0.1524" layer="90" style="shortdash"/>
-<wire x1="-165.1" y1="76.2" x2="-281.94" y2="76.2" width="0.1524" layer="90" style="shortdash"/>
-<text x="-279.4" y="68.58" size="5.08" layer="90">Power</text>
+<wire x1="-165.1" y1="76.2" x2="-274.32" y2="76.2" width="0.1524" layer="90" style="shortdash"/>
+<text x="-271.78" y="68.58" size="5.08" layer="90">Power</text>
 <text x="121.92" y="68.58" size="5.08" layer="90">Motor driver</text>
 <text x="-157.48" y="-50.8" size="5.08" layer="90">Connectors</text>
 </plain>
@@ -20594,10 +20606,6 @@ Source: www.kingbright.com</description>
 <attribute name="NAME" x="-200.66" y="45.72" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-200.66" y="43.18" size="1.778" layer="96"/>
 </instance>
-<instance part="Q1" gate="G$1" x="-251.46" y="0" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="-240.03" y="0" size="1.778" layer="96" rot="MR0"/>
-<attribute name="NAME" x="-245.11" y="2.54" size="1.778" layer="95" rot="MR0"/>
-</instance>
 <instance part="U$1" gate="G$1" x="-144.78" y="38.1" smashed="yes">
 <attribute name="NAME" x="-144.78" y="35.56" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-144.78" y="33.02" size="1.778" layer="96"/>
@@ -20646,17 +20654,16 @@ Source: www.kingbright.com</description>
 <attribute name="VALUE" x="-99.06" y="-38.1" size="1.778" layer="96"/>
 </instance>
 <instance part="P+13" gate="VCC" x="-96.52" y="-10.16" smashed="yes"/>
-<instance part="BATT" gate="G$1" x="-266.7" y="10.16" smashed="yes" rot="R180">
-<attribute name="NAME" x="-260.35" y="4.445" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-260.35" y="15.24" size="1.778" layer="96" rot="R180"/>
+<instance part="BATT" gate="G$1" x="-269.24" y="20.32" smashed="yes" rot="R180">
+<attribute name="NAME" x="-262.89" y="14.605" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-262.89" y="25.4" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="GND2" gate="1" x="-256.54" y="-7.62" smashed="yes">
-<attribute name="VALUE" x="-259.08" y="-10.16" size="1.778" layer="96"/>
+<instance part="GND2" gate="1" x="-259.08" y="-7.62" smashed="yes">
+<attribute name="VALUE" x="-261.62" y="-10.16" size="1.778" layer="96"/>
 </instance>
-<instance part="P+17" gate="VCC" x="-256.54" y="17.78" smashed="yes"/>
-<instance part="R1" gate="G$1" x="-248.92" y="10.16" smashed="yes" rot="R180">
-<attribute name="NAME" x="-245.11" y="8.6614" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-245.11" y="13.462" size="1.778" layer="96" rot="R180"/>
+<instance part="R1" gate="G$1" x="-251.46" y="10.16" smashed="yes" rot="R180">
+<attribute name="NAME" x="-247.65" y="8.6614" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-247.65" y="13.462" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND3" gate="1" x="-203.2" y="38.1" smashed="yes">
 <attribute name="VALUE" x="-205.74" y="35.56" size="1.778" layer="96"/>
@@ -20970,6 +20977,15 @@ Source: www.kingbright.com</description>
 <attribute name="VALUE" x="-208.28" y="-10.16" size="1.778" layer="96"/>
 </instance>
 <instance part="P+37" gate="VCC" x="-205.74" y="27.94" smashed="yes"/>
+<instance part="Q1" gate="G$1" x="-241.3" y="17.78" smashed="yes" rot="R90">
+<attribute name="NAME" x="-238.76" y="22.86" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-241.3" y="22.86" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+17" gate="VCC" x="-231.14" y="27.94" smashed="yes"/>
+<instance part="R18" gate="G$1" x="-243.84" y="2.54" smashed="yes" rot="R90">
+<attribute name="NAME" x="-245.3386" y="-1.27" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-240.538" y="-1.27" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -21083,11 +21099,6 @@ Source: www.kingbright.com</description>
 <pinref part="GND12" gate="1" pin="GND"/>
 <wire x1="-93.98" y1="-30.48" x2="-96.52" y2="-30.48" width="0.1524" layer="91"/>
 <wire x1="-96.52" y1="-30.48" x2="-96.52" y2="-33.02" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="Q1" gate="G$1" pin="S"/>
-<pinref part="GND2" gate="1" pin="GND"/>
-<wire x1="-256.54" y1="-2.54" x2="-256.54" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$7" gate="G$1" pin="GND"/>
@@ -21250,6 +21261,12 @@ Source: www.kingbright.com</description>
 <pinref part="R17" gate="G$1" pin="2"/>
 <pinref part="GND42" gate="1" pin="GND"/>
 <wire x1="-205.74" y1="0" x2="-205.74" y2="-5.08" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="BATT" gate="G$1" pin="1"/>
+<wire x1="-259.08" y1="17.78" x2="-266.7" y2="17.78" width="0.1524" layer="91"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+<wire x1="-259.08" y1="17.78" x2="-259.08" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3,3V" class="0">
@@ -21682,25 +21699,7 @@ Source: www.kingbright.com</description>
 <label x="-58.42" y="55.88" size="1.016" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="BAT-" class="0">
-<segment>
-<pinref part="Q1" gate="G$1" pin="D"/>
-<wire x1="-256.54" y1="2.54" x2="-256.54" y2="7.62" width="0.1524" layer="91"/>
-<pinref part="BATT" gate="G$1" pin="1"/>
-<wire x1="-256.54" y1="7.62" x2="-264.16" y2="7.62" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="BAT+" class="0">
-<segment>
-<pinref part="P+17" gate="VCC" pin="VCC"/>
-<wire x1="-256.54" y1="15.24" x2="-256.54" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="BATT" gate="G$1" pin="2"/>
-<wire x1="-256.54" y1="10.16" x2="-264.16" y2="10.16" width="0.1524" layer="91"/>
-<label x="-254" y="20.32" size="1.778" layer="95" rot="R180"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="-254" y1="10.16" x2="-256.54" y2="10.16" width="0.1524" layer="91"/>
-<junction x="-256.54" y="10.16"/>
-</segment>
 <segment>
 <pinref part="U$7" gate="G$1" pin="VIN"/>
 <wire x1="-220.98" y1="66.04" x2="-226.06" y2="66.04" width="0.1524" layer="91"/>
@@ -21773,17 +21772,20 @@ Source: www.kingbright.com</description>
 <wire x1="-266.7" y1="50.8" x2="-266.7" y2="53.34" width="0.1524" layer="91"/>
 <junction x="-266.7" y="53.34"/>
 </segment>
+<segment>
+<pinref part="P+17" gate="VCC" pin="VCC"/>
+<wire x1="-231.14" y1="25.4" x2="-231.14" y2="20.32" width="0.1524" layer="91"/>
+<label x="-228.6" y="30.48" size="1.778" layer="95" rot="R180"/>
+<pinref part="Q1" gate="G$1" pin="D"/>
+<wire x1="-236.22" y1="20.32" x2="-231.14" y2="20.32" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="ROBOT_OFF" class="0">
 <segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="-243.84" y1="10.16" x2="-238.76" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="-238.76" y1="10.16" x2="-238.76" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="-238.76" y1="-2.54" x2="-246.38" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="-238.76" y1="-2.54" x2="-236.22" y2="-2.54" width="0.1524" layer="91"/>
-<junction x="-238.76" y="-2.54"/>
-<label x="-236.22" y="-2.54" size="1.016" layer="95" xref="yes"/>
+<label x="-238.76" y="-5.08" size="1.016" layer="95" xref="yes"/>
+<wire x1="-243.84" y1="-2.54" x2="-243.84" y2="-5.08" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="1"/>
+<wire x1="-243.84" y1="-5.08" x2="-238.76" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <label x="-76.2" y="-83.82" size="1.016" layer="95" xref="yes"/>
@@ -22378,6 +22380,28 @@ Source: www.kingbright.com</description>
 <pinref part="P+24" gate="VCC" pin="VCC"/>
 <wire x1="-142.24" y1="-78.74" x2="-142.24" y2="-68.58" width="0.1524" layer="91"/>
 <label x="-139.7" y="-63.5" size="1.778" layer="95" rot="R180"/>
+</segment>
+</net>
+<net name="BAT" class="0">
+<segment>
+<pinref part="BATT" gate="G$1" pin="2"/>
+<wire x1="-246.38" y1="20.32" x2="-256.54" y2="20.32" width="0.1524" layer="91"/>
+<pinref part="Q1" gate="G$1" pin="S"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="-256.54" y1="20.32" x2="-266.7" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="-256.54" y1="10.16" x2="-256.54" y2="20.32" width="0.1524" layer="91"/>
+<junction x="-256.54" y="20.32"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="-246.38" y1="10.16" x2="-243.84" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="Q1" gate="G$1" pin="G"/>
+<wire x1="-243.84" y1="10.16" x2="-243.84" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="2"/>
+<wire x1="-243.84" y1="7.62" x2="-243.84" y2="10.16" width="0.1524" layer="91"/>
+<junction x="-243.84" y="10.16"/>
 </segment>
 </net>
 </nets>
