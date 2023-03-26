@@ -9630,7 +9630,7 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="S1" library="smd-special" library_urn="urn:adsk.eagle:library:362" deviceset="SWS004" device="" package3d_urn="urn:adsk.eagle:package:26474/1" override_package3d_urn="urn:adsk.eagle:package:39682841/3" override_package_urn="urn:adsk.eagle:footprint:26411/1"/>
 <part name="SV1" library="con-harting-ml" library_urn="urn:adsk.eagle:library:149" deviceset="ML10" device="" package3d_urn="urn:adsk.eagle:package:6967/1" override_package3d_urn="urn:adsk.eagle:package:39682857/2" override_package_urn="urn:adsk.eagle:footprint:6908/1"/>
 <part name="S2" library="smd-special" library_urn="urn:adsk.eagle:library:362" deviceset="SWS001" device="" package3d_urn="urn:adsk.eagle:package:26467/1" override_package3d_urn="urn:adsk.eagle:package:39682842/3" override_package_urn="urn:adsk.eagle:footprint:26408/1"/>
-<part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="SML0805" package3d_urn="urn:adsk.eagle:package:15830/1"/>
+<part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="CHIP-LED0805" package3d_urn="urn:adsk.eagle:package:15818/2"/>
 <part name="X1" library="con-hirose" library_urn="urn:adsk.eagle:library:152" deviceset="FH12-14S-0.5S" device="H" package3d_urn="urn:adsk.eagle:package:7327/1" override_package3d_urn="urn:adsk.eagle:package:39279061/2" override_package_urn="urn:adsk.eagle:footprint:7251/1"/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
@@ -9833,7 +9833,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <segment>
 <pinref part="GND5" gate="1" pin="GND"/>
 <pinref part="GND6" gate="1" pin="GND"/>
-<pinref part="LED1" gate="G$1" pin="C"/>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <wire x1="91.44" y1="5.08" x2="91.44" y2="2.54" width="0.1524" layer="91"/>
 </segment>
