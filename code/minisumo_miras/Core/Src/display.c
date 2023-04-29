@@ -1,3 +1,14 @@
+/**
+ * @file display.c
+ * @author Eryk
+ * @brief
+ * @version 0.1
+ * @date 2023-04-27
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include "display.h"
 
 extern I2C_HandleTypeDef hi2c2;
@@ -5,12 +16,10 @@ extern I2C_HandleTypeDef hi2c2;
 static uint8_t buffer[DISPLAY_WIDTH*DISPLAY_HEIGHT/8] = {0};
 
 static inline void write_cmd(const uint8_t byte) {
-	//i2c1_write_8(DISPLAY_ADDRESS, 0x00, &byte, 1, 100);
 	HAL_I2C_Mem_Write(&hi2c2, DISPLAY_ADDRESS << 1, 0x00, 1, (uint8_t *) &byte, 1, HAL_MAX_DELAY);
 }
 
 static inline void write_buffer(const void *src, const uint32_t size) {
-	//i2c1_write_8(DISPLAY_ADDRESS, 0x40, src, size, 100);
 	HAL_I2C_Mem_Write(&hi2c2, DISPLAY_ADDRESS << 1, 0x40, 1, (uint8_t *) src, size, HAL_MAX_DELAY);
 }
 
@@ -147,7 +156,6 @@ void display_inverse(const int16_t x, const int16_t y, const int16_t w, const in
 
 void display_bitmap(const int16_t x, const int16_t y, const display_color_t color, const void *src, const int16_t w, const int16_t h) {
 	const uint16_t byte_per_row = ceilf((float)w/8.f);
-
 
 	for(int16_t i=0; i<h; i++) {
 		for(int16_t j=0; j<w; j++) {

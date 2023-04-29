@@ -1,32 +1,28 @@
+/**
+ * @file moving_average_filter.h
+ * @author Dominik
+ * @brief
+ * @version 0.1
+ * @date 2023-04-29
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef MOVING_AVERAGE_FILTER_H
 #define MOVING_AVERAGE_FILTER_H
 
-#define T float
-
+#include "stdint.h"
+#define NUM_OF_READINGS 10
 
 typedef struct {
-	uint8_t num_of_readings = 10;
-	T readings[num_of_readings];   //stores defined amount of readings to be averaged out
-	int readIndex = 0;                 //the index of the current reading
-	T total = 0;                   //sum of all readings
-	T average = 0;
+	uint16_t readings[NUM_OF_READINGS]; //stores defined amount of readings to be averaged out
+	uint8_t readIndex;         			//the index of the current reading
+	uint32_t total;                     //sum of all readings
+	uint16_t average;
 }MovingAverage;
 
-void initAverage(){
-	for (int i = 0; i < num_of_readings; ++i)
-    readings[i] = 0;
-}
-
-T calculate(T reading){
-	total -= readings[readIndex];       //subtract the last reading:
-	readings[readIndex] = reading;      //read from the sensor:
-	total += readings[readIndex];       //add the reading to the total:
-	++readIndex;                        //advance to the next position in the array:
-	if (readIndex >= num_of_readings)   //if we're at the end of the array...
-	readIndex = 0;                    //...wrap around to the beginning:
-	average = total / num_of_readings;  //calculate the average:
-	return average;
-}
-
+void initAverage(MovingAverage * mvngAverage, uint16_t initialValue);
+uint16_t calculateAverage(MovingAverage * mvngAverage, uint16_t reading);
 
 #endif

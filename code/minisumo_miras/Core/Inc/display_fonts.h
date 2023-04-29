@@ -1,3 +1,14 @@
+/**
+ * @file display_fonts.h
+ * @author Eryk
+ * @brief
+ * @version 0.1
+ * @date 2023-04-27
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef DISPLAY_FONTS_H
 #define DISPLAY_FONTS_H
 

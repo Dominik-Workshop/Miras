@@ -17,13 +17,13 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <sprites.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "display.h"
-#include "sprites.h"
-//#include "moving_average_filter.h"
+#include "battery.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,11 +74,6 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#define NUM_OF_READINGS 10
-int readings[NUM_OF_READINGS];   //stores defined amount of readings to be averaged out
-int readIndex = 0;                 //the index of the current reading
-int total = 0;                   //sum of all readings
-int average = 0;
 
 /* USER CODE END 0 */
 
@@ -124,7 +119,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  /*
+
+  /*I2C scanner
   int zmienna;
   for(int i = 0; i < 128; ++i){
 	  if(HAL_I2C_Mem_Write(&hi2c2, i<<1, 0, 1, &zmienna, sizeof(int), 50) == HAL_OK){
@@ -134,32 +130,37 @@ int main(void)
   }
   */
 
- for (int i = 0; i < NUM_OF_READINGS; ++i)
-      readings[i] = 0;
+  Battery battery;
 
- uint16_t battery;
- HAL_ADC_Start_DMA(&hadc1, (uint32_t *) &battery, 1);
- display_fill(DISPLAY_COLOR_BLACK);
- display_printf(20, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Hello world");
- display_render();
- HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_12);
- HAL_Delay(1000);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *) & battery.adc_reading, 1);
+
+  display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
+  display_render();
+
+  HAL_Delay(500);
+
+  initAverage(& (battery.adc_average), battery.adc_reading);
   while (1)
   {
-	total -= readings[readIndex];       //subtract the last reading:
-	readings[readIndex] = battery;      //read from the sensor:
-	total += readings[readIndex];       //add the reading to the total:
-	++readIndex;                        //advance to the next position in the array:
-	if (readIndex >= NUM_OF_READINGS)   //if we're at the end of the array...
-	readIndex = 0;                    //...wrap around to the beginning:
-	average = total / NUM_OF_READINGS;  //calculate the average:
-
-	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, &konar_v_128_64, 128, 64);
-	//display_printf(8, 8, DISPLAY_COLOR_WHITE, display_font_7x10, "%d", (((int) battery))*3,3/4096 * 3,3/13,3);
-	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", ((int) average) *3.3 / 4096 * 13.3 / 3.3);
-	//printf("%d", battery);
+	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_konar_vertical_128_64, 128, 64);
+	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
 	display_render();
-	HAL_Delay(10);
+	HAL_Delay(1000);
+
+	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_sneak100_128_64, 128, 64);
+	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
+	display_render();
+	HAL_Delay(1000);
+
+	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_minecraft_book_32_32, 32, 32);
+	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
+	display_render();
+	HAL_Delay(1000);
+
+	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_minecraft_night_vision_32_32, 32, 32);
+	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
+	display_render();
+	HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
