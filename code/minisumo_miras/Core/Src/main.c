@@ -17,13 +17,13 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <sprites.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "display.h"
 #include "battery.h"
+#include "sprites.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -131,36 +131,51 @@ int main(void)
   */
 
   Battery battery;
+  uint32_t values_adc[4];
 
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *) & battery.adc_reading, 1);
+  HAL_ADC_Start_DMA(&hadc1, values_adc, 4);
 
   display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
   display_render();
 
   HAL_Delay(500);
-
+  //HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
+  battery.adc_reading = values_adc[0];
   initAverage(& (battery.adc_average), battery.adc_reading);
+  display_fill(DISPLAY_COLOR_BLACK);
   while (1)
   {
+	battery.adc_reading = values_adc[0];
+	display_fill(DISPLAY_COLOR_BLACK);
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_konar_vertical_128_64, 128, 64);
 	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
+	display_printf(0, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[1]);
+	display_printf(0, 10, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[2]);
+	display_printf(0, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[3]);
+	//display_printf(96, 20, DISPLAY_COLOR_WHITE, display_font_6x8, values_adc[2]);
+	//display_printf(96, 30, DISPLAY_COLOR_WHITE, display_font_6x8, values_adc[3]);
 	display_render();
-	HAL_Delay(1000);
+	HAL_Delay(1);
 
+	/*
+	battery.adc_reading = values_adc[0];
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_sneak100_128_64, 128, 64);
 	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
 	display_render();
 	HAL_Delay(1000);
 
+	battery.adc_reading = values_adc[0];
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_minecraft_book_32_32, 32, 32);
 	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
 	display_render();
 	HAL_Delay(1000);
 
+	battery.adc_reading = values_adc[0];
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_minecraft_night_vision_32_32, 32, 32);
 	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
 	display_render();
 	HAL_Delay(1000);
+	*/
 
     /* USER CODE END WHILE */
 
@@ -239,7 +254,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.NbrOfConversion = 4;
   hadc1.Init.DMAContinuousRequests = ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -252,6 +267,33 @@ static void MX_ADC1_Init(void)
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_11;
+  sConfig.Rank = 2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_12;
+  sConfig.Rank = 3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_13;
+  sConfig.Rank = 4;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();

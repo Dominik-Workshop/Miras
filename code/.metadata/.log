@@ -1,0 +1,19 @@
+!SESSION 2023-05-01 01:18:37.632 -----------------------------------------------
+eclipse.buildId=Version 1.11.0
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
+Framework arguments:  E:\projects\minisumo\code\minisumo_miras\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 E:\projects\minisumo\code\minisumo_miras\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-05-01 01:19:03.655
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-05-01 01:19:03.736
+!MESSAGE Log4j initialized with config file E:\projects\minisumo\code\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-05-01 01:19:07.678
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-05-01 01:19:13.674
+!MESSAGE Indexed 'minisumo_miras' (40 sources, 141 headers) in 3,64 sec: 14 726 declarations; 83 909 references; 20 unresolved inclusions; 1 282 syntax errors; 2 161 unresolved names (2,1%)
