@@ -24,4 +24,11 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \
+Drivers/VL53L0X/Debug/Core/Src \
+Drivers/VL53L0X/Debug/Core/Startup \
+Drivers/VL53L0X/Debug/Drivers/STM32F4xx_HAL_Driver/Src \
+Drivers/VL53L0X/Debug/Drivers/VL53L0X/core/src \
+Drivers/VL53L0X/Debug/Drivers/VL53L0X/platform/src \
+Drivers/VL53L0X/core/src \
+Drivers/VL53L0X/platform/src \
 

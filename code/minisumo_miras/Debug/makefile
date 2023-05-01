@@ -9,6 +9,13 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Drivers/VL53L0X/platform/src/subdir.mk
+-include Drivers/VL53L0X/core/src/subdir.mk
+-include Drivers/VL53L0X/Debug/Drivers/VL53L0X/platform/src/subdir.mk
+-include Drivers/VL53L0X/Debug/Drivers/VL53L0X/core/src/subdir.mk
+-include Drivers/VL53L0X/Debug/Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
+-include Drivers/VL53L0X/Debug/Core/Startup/subdir.mk
+-include Drivers/VL53L0X/Debug/Core/Src/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -60,8 +67,8 @@ all: main-build
 main-build: minisumo_miras.elf secondary-outputs
 
 # Tool invocations
-minisumo_miras.elf minisumo_miras.map: $(OBJS) $(USER_OBJS) C:\Users\Dominik\STM32CubeIDE\workspace_1.11.0\minisumo_miras\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Dominik\STM32CubeIDE\workspace_1.11.0\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+minisumo_miras.elf minisumo_miras.map: $(OBJS) $(USER_OBJS) E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
