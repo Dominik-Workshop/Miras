@@ -137,9 +137,9 @@ int main(void)
   HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_SET); // Enable XSHUT
   HAL_Delay(20);
 
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_RESET); // Disable XSHUT
+  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X3_Pin, GPIO_PIN_RESET); // Disable XSHUT
   HAL_Delay(20);
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_SET); // Enable XSHUT
+  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X3_Pin, GPIO_PIN_SET); // Enable XSHUT
   HAL_Delay(20);
   //
   // VL53L0X init for Single Measurement
@@ -220,16 +220,15 @@ int main(void)
 
 	HAL_Delay(1);
 
-	VL53L0X_PerformSingleRangingMeasurement(Dev3, &RangingData3);
-	if(RangingData3.RangeStatus == 0){
-		display_printf(0, 40, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData3.RangeMilliMeter);
+	VL53L0X_PerformSingleRangingMeasurement(Dev3, &RangingData);
+
+	if(RangingData.RangeStatus == 0){
+		display_printf(0, 40, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData.RangeMilliMeter);
 		//MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
 		//HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
 	}
-
-	VL53L0X_PerformSingleRangingMeasurement(Dev4, &RangingData4);
-	if(RangingData4.RangeStatus == 0){
-			display_printf(0, 50, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData4.RangeMilliMeter);
+	if(RangingData.RangeStatus == 0){
+			display_printf(0, 50, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData.RangeMilliMeter);
 			//MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
 			//HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
 		}

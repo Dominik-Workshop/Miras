@@ -55,13 +55,12 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-VL53L0X_RangingMeasurementData_t RangingData3;
-VL53L0X_Dev_t  vl53l0x_c3; // center module
-VL53L0X_DEV    Dev3 = &vl53l0x_c3;
+uint8_t Message[64];
+uint8_t MessageLen;
 
-VL53L0X_RangingMeasurementData_t RangingData4;
-VL53L0X_Dev_t  vl53l0x_c4; // center module
-VL53L0X_DEV    Dev4 = &vl53l0x_c4;
+VL53L0X_RangingMeasurementData_t RangingData;
+VL53L0X_Dev_t  vl53l0x_c; // center module
+VL53L0X_DEV    Dev = &vl53l0x_c;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -126,58 +125,34 @@ int main(void)
   /* USER CODE BEGIN 2 */
   display_init();
 
-  Dev3->I2cHandle = &hi2c1;
-  Dev3->I2cDevAddr = 0x52;
-
-  Dev4->I2cHandle = &hi2c3;
-  Dev4->I2cDevAddr = 0x52;
+  Dev->I2cHandle = &hi2c1;
+  Dev->I2cDevAddr = 0x52;
 
   HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_RESET); // Disable XSHUT
   HAL_Delay(20);
   HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_SET); // Enable XSHUT
   HAL_Delay(20);
 
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_RESET); // Disable XSHUT
-  HAL_Delay(20);
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_SET); // Enable XSHUT
-  HAL_Delay(20);
   //
   // VL53L0X init for Single Measurement
   //
 
-  VL53L0X_WaitDeviceBooted( Dev3 );
-  VL53L0X_DataInit( Dev3 );
-  VL53L0X_StaticInit( Dev3 );
-  VL53L0X_PerformRefCalibration(Dev3, &VhvSettings, &PhaseCal);
-  VL53L0X_PerformRefSpadManagement(Dev3, &refSpadCount, &isApertureSpads);
-  VL53L0X_SetDeviceMode(Dev3, VL53L0X_DEVICEMODE_SINGLE_RANGING);
+  VL53L0X_WaitDeviceBooted( Dev );
+  VL53L0X_DataInit( Dev );
+  VL53L0X_StaticInit( Dev );
+  VL53L0X_PerformRefCalibration(Dev, &VhvSettings, &PhaseCal);
+  VL53L0X_PerformRefSpadManagement(Dev, &refSpadCount, &isApertureSpads);
+  VL53L0X_SetDeviceMode(Dev, VL53L0X_DEVICEMODE_SINGLE_RANGING);
 
   // Enable/Disable Sigma and Signal check
 
-  VL53L0X_SetLimitCheckEnable(Dev3, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckEnable(Dev3, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckValue(Dev3, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536));
-  VL53L0X_SetLimitCheckValue(Dev3, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536));
-  VL53L0X_SetMeasurementTimingBudgetMicroSeconds(Dev3, 33000);
-  VL53L0X_SetVcselPulsePeriod(Dev3, VL53L0X_VCSEL_PERIOD_PRE_RANGE, 18);
-  VL53L0X_SetVcselPulsePeriod(Dev3, VL53L0X_VCSEL_PERIOD_FINAL_RANGE, 14);
-
-  VL53L0X_WaitDeviceBooted( Dev4 );
-  VL53L0X_DataInit( Dev4 );
-  VL53L0X_StaticInit( Dev4 );
-  VL53L0X_PerformRefCalibration(Dev4, &VhvSettings, &PhaseCal);
-  VL53L0X_PerformRefSpadManagement(Dev4, &refSpadCount, &isApertureSpads);
-  VL53L0X_SetDeviceMode(Dev4, VL53L0X_DEVICEMODE_SINGLE_RANGING);
-
-  // Enable/Disable Sigma and Signal check
-
-  VL53L0X_SetLimitCheckEnable(Dev4, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckEnable(Dev4, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckValue(Dev4, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536));
-  VL53L0X_SetLimitCheckValue(Dev4, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536));
-  VL53L0X_SetMeasurementTimingBudgetMicroSeconds(Dev4, 33000);
-  VL53L0X_SetVcselPulsePeriod(Dev4, VL53L0X_VCSEL_PERIOD_PRE_RANGE, 18);
-  VL53L0X_SetVcselPulsePeriod(Dev4, VL53L0X_VCSEL_PERIOD_FINAL_RANGE, 14);
+  VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1);
+  VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1);
+  VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536));
+  VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536));
+  VL53L0X_SetMeasurementTimingBudgetMicroSeconds(Dev, 33000);
+  VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_PRE_RANGE, 18);
+  VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_FINAL_RANGE, 14);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -220,21 +195,16 @@ int main(void)
 
 	HAL_Delay(1);
 
-	VL53L0X_PerformSingleRangingMeasurement(Dev3, &RangingData3);
-	if(RangingData3.RangeStatus == 0){
-		display_printf(0, 40, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData3.RangeMilliMeter);
-		//MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
-		//HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
-	}
+	VL53L0X_PerformSingleRangingMeasurement(Dev, &RangingData);
 
-	VL53L0X_PerformSingleRangingMeasurement(Dev4, &RangingData4);
-	if(RangingData4.RangeStatus == 0){
-			display_printf(0, 50, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData4.RangeMilliMeter);
-			//MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
-			//HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
-		}
+		  if(RangingData.RangeStatus == 0)
+		  {
+			  display_printf(0, 40, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", RangingData.RangeMilliMeter);
+			  //MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
+			  //HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
 
-	display_render();
+		  }
+		  display_render();
 	/*
 	battery.adc_reading = values_adc[0];
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_sneak100_128_64, 128, 64);
