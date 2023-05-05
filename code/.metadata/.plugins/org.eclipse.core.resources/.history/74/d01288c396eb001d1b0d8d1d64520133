@@ -25,6 +25,6 @@ void batteryInit(Battery battery, ADC_HandleTypeDef hadc1){
  */
 float calculateBatteryVoltage(Battery* battery){
 	calculateAverage(&(battery->adc_average), battery->adc_reading);
-	battery->voltage = battery->adc_average.average * U_REF / RESOLUTION * (R7 + R8) / R8;
+	battery->voltage = battery->adc_average.average * 3.3 / 4096 * 13.3 / 3.3;
 	return battery->voltage;
 }

@@ -15,10 +15,8 @@
 #include "stdint.h"
 #include "moving_average_filter.h"
 
-#define RESOLUTION 4096 //resolution of the measurements
-#define U_REF 3.3		//voltage reference of the ADC
-#define R7 10000		//[ohm] upper resistor in voltage divider
-#define R8 3300			//[ohm] lower resistor in voltage divider
+#define R7 10000	//[ohm] upper resistor in voltage divider
+#define R8 3300		//[ohm] lower resistor in voltage divider
 
 typedef struct{
 	uint16_t adc_reading;		// 0-4095
