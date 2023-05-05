@@ -170,14 +170,9 @@ int main(void)
 	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 	}
 	else{
-	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4100);
+	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 5100);
 	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
 	}
-
-	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin))
-		  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
-	else
-	  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
 
 	battery.adc_reading = values_adc[0];
 	display_fill(DISPLAY_COLOR_BLACK);

@@ -163,6 +163,7 @@ int main(void)
   //HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
   battery.adc_reading = values_adc[0];
   initAverage(& (battery.adc_average), battery.adc_reading);
+  display_fill(DISPLAY_COLOR_BLACK);
   while (1)
   {
 	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin)){
@@ -173,11 +174,6 @@ int main(void)
 	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4100);
 	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
 	}
-
-	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin))
-		  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
-	else
-	  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
 
 	battery.adc_reading = values_adc[0];
 	display_fill(DISPLAY_COLOR_BLACK);

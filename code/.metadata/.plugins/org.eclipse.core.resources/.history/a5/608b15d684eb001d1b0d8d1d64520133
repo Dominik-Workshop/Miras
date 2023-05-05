@@ -163,22 +163,10 @@ int main(void)
   //HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
   battery.adc_reading = values_adc[0];
   initAverage(& (battery.adc_average), battery.adc_reading);
+  display_fill(DISPLAY_COLOR_BLACK);
   while (1)
   {
-	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin)){
-	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 1100);
-	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-	}
-	else{
-	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4100);
-	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
-	}
-
-	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin))
-		  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
-	else
-	  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
-
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 1900);
 	battery.adc_reading = values_adc[0];
 	display_fill(DISPLAY_COLOR_BLACK);
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_konar_vertical_128_64, 128, 64);
@@ -189,6 +177,12 @@ int main(void)
 	//display_printf(96, 20, DISPLAY_COLOR_WHITE, display_font_6x8, values_adc[2]);
 	//display_printf(96, 30, DISPLAY_COLOR_WHITE, display_font_6x8, values_adc[3]);
 
+	//HAL_GPIO_TogglePin(user_LED_GPIO_Port, user_LED_Pin);
+	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin))
+		HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
+	else
+		HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
 
 	VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
 	if(TOF3.RangingData.RangeStatus == 0){
@@ -650,17 +644,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SW4_Pin SW3_Pin SW2_Pin */
-  GPIO_InitStruct.Pin = SW4_Pin|SW3_Pin|SW2_Pin;
+  /*Configure GPIO pin : SW3_Pin */
+  GPIO_InitStruct.Pin = SW3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : SW1_Pin */
-  GPIO_InitStruct.Pin = SW1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SW1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(SW3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : motor_R_DIR_2_Pin motor_R_DIR_1_Pin user_LED_Pin TOF_X5_Pin
                            motor_L_DIR_1_Pin motor_L_DIR_2_Pin */

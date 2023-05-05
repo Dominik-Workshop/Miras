@@ -1,10 +1,10 @@
-19:11:30 **** Incremental Build of configuration Debug for project minisumo_miras ****
+00:24:44 **** Incremental Build of configuration Debug for project minisumo_miras ****
 make -j12 all 
 arm-none-eabi-size   minisumo_miras.elf 
    text	   data	    bss	    dec	    hex	filename
-  71008	   1192	   4168	  76368	  12a50	minisumo_miras.elf
+  72592	   1192	   4168	  77952	  13080	minisumo_miras.elf
 Finished building: default.size.stdout
  
 
-19:11:31 Build Finished. 0 errors, 0 warnings. (took 1s.59ms)
+00:24:44 Build Finished. 0 errors, 0 warnings. (took 495ms)
 

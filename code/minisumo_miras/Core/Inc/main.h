@@ -75,8 +75,16 @@ void Error_Handler(void);
 #define adc_line_sensor2_GPIO_Port GPIOC
 #define adc_line_sensor3_Pin GPIO_PIN_3
 #define adc_line_sensor3_GPIO_Port GPIOC
+#define SW4_Pin GPIO_PIN_4
+#define SW4_GPIO_Port GPIOA
+#define SW3_Pin GPIO_PIN_5
+#define SW3_GPIO_Port GPIOA
 #define motor_R_PWM_Pin GPIO_PIN_6
 #define motor_R_PWM_GPIO_Port GPIOA
+#define SW2_Pin GPIO_PIN_7
+#define SW2_GPIO_Port GPIOA
+#define SW1_Pin GPIO_PIN_4
+#define SW1_GPIO_Port GPIOC
 #define TOF_X6_Pin GPIO_PIN_5
 #define TOF_X6_GPIO_Port GPIOC
 #define motor_R_DIR_2_Pin GPIO_PIN_0
@@ -87,6 +95,8 @@ void Error_Handler(void);
 #define motor_R_DIR_1_GPIO_Port GPIOB
 #define starter_Pin GPIO_PIN_12
 #define starter_GPIO_Port GPIOB
+#define user_LED_Pin GPIO_PIN_13
+#define user_LED_GPIO_Port GPIOB
 #define TOF_X5_Pin GPIO_PIN_14
 #define TOF_X5_GPIO_Port GPIOB
 #define TOF_X4_Pin GPIO_PIN_12

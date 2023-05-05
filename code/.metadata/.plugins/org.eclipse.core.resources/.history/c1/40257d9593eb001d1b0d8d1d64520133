@@ -177,6 +177,7 @@ int main(void)
 	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin))
 		  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
 	else
+	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4100);
 	  HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
 
 	battery.adc_reading = values_adc[0];
