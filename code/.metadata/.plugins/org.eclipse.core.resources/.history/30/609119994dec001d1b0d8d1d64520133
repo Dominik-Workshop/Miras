@@ -1,0 +1,17 @@
+/**
+ * @file motors.h
+ * @author Dominik
+ * @brief
+ * @version 0.1
+ * @date 2023-05-6
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
+#ifndef MOTORS_H
+#define MOTORS_H
+
+motor_L_set_speed(uint8_t speed);
+
+#endif
