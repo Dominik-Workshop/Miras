@@ -2,6 +2,7 @@
 "./Core/Src/display.o"
 "./Core/Src/display_fonts.o"
 "./Core/Src/main.o"
+"./Core/Src/modes_of_operation.o"
 "./Core/Src/motors.o"
 "./Core/Src/moving_average.o"
 "./Core/Src/sprites.o"

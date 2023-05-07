@@ -1,0 +1,10 @@
+#include "modes_of_operation.h"
+
+void debug_screen(){
+
+}
+
+void fight(){
+	motor_L_set_direction(FORWARD);
+	motor_R_set_direction(FORWARD);
+}

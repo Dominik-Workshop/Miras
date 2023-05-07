@@ -1,0 +1,21 @@
+#include "modes_of_operation.h"
+
+void debug_screen(){
+	uint8_t speed = 0;
+
+	motor_L_set_speed(speed);
+	motor_R_set_speed(100 - speed);
+	speed += 5;
+	if(speed > 100){
+		speed = 0;
+	}
+
+
+}
+
+void fight(){
+	motor_L_set_direction(FORWARD);
+	motor_R_set_direction(FORWARD);
+	motor_L_set_speed(50);
+	motor_R_set_speed(50);
+}

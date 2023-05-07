@@ -21,10 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "modes_of_operation.h"
 #include "display.h"
 #include "battery.h"
 #include "motors.h"
-#include "sprites.h"
 #include "vl53l0x_api.h"
 #include "vl53l0_init.h"
 /* USER CODE END Includes */
@@ -57,12 +57,20 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+Battery battery;
+uint32_t values_adc[4];
+
 TOF_VL53L0X TOF1;
 TOF_VL53L0X TOF2;
 TOF_VL53L0X TOF3;
 TOF_VL53L0X TOF4;
 TOF_VL53L0X TOF5;
 TOF_VL53L0X TOF6;
+
+uint32_t refSpadCount;
+uint8_t isApertureSpads;
+uint8_t VhvSettings;
+uint8_t PhaseCal;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,15 +100,7 @@ static void MX_TIM3_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  Battery battery;
-  uint32_t values_adc[4];
 
-  uint32_t refSpadCount;
-  uint8_t isApertureSpads;
-  uint8_t VhvSettings;
-  uint8_t PhaseCal;
-
-  uint8_t speed = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -133,9 +133,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-
-  HAL_Delay(10);
-  display_init();
+  HAL_ADC_Start_DMA(&hadc1, values_adc, 4);
 
   TOF3.vl53l0x_c.I2cHandle = &hi2c1;
   TOF3.vl53l0x_c.I2cDevAddr = 0x52;
@@ -155,66 +153,23 @@ int main(void)
 
   tof_vl53l0_init(&TOF3.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
   tof_vl53l0_init(&TOF4.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
+
+  display_init();
+  display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
+  display_render();
+  battery.adc_reading = values_adc[0];
+  initAverage(& (battery.adc_average), battery.adc_reading);
+  //HAL_Delay(500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  motor_L_set_direction(FORWARD);
-  motor_R_set_direction(FORWARD);
-  HAL_ADC_Start_DMA(&hadc1, values_adc, 4);
-
-  display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
-  display_render();
-  servo_set_eangle(45);
-
-  HAL_Delay(500);
-  battery.adc_reading = values_adc[0];
-  initAverage(& (battery.adc_average), battery.adc_reading);
-
   while (1)
   {
-	motor_L_set_speed(speed);
-	motor_R_set_speed(100 - speed);
-	speed += 5;
-	if(speed > 100){
-		speed = 0;
-	}
-
-	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin)){
-	  servo_set_eangle(0);
-	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-	}
-	else{
-	  servo_set_eangle(180);
-	  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
-	}
-
-	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin))
-		HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
+	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin))
+		fight();
 	else
-		HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
-
-	battery.adc_reading = values_adc[0];
-	display_fill(DISPLAY_COLOR_BLACK);
-	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_konar_vertical_128_64, 128, 64);
-	display_printf(96, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%.2fV", calculateBatteryVoltage(& battery));
-	display_printf(0, 0, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[1]);
-	display_printf(0, 10, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[2]);
-	display_printf(0, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[3]);
-
-
-	VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-	if(TOF3.RangingData.RangeStatus == 0){
-		display_printf(0, 40, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF3.RangingData.RangeMilliMeter);
-	}
-
-	VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-	if(TOF4.RangingData.RangeStatus == 0){
-			display_printf(0, 50, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF4.RangingData.RangeMilliMeter);
-	}
-
-	display_render();
+		debug_screen();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
