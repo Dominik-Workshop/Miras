@@ -9,16 +9,17 @@
  *
  */
 
+#define SENSING_DISTANCE 200
 #include "modes_of_operation.h"
 
 void debug_screen(){
-	while(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == 0){
+	while(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0){
 		if(HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin)){
-			  servo_set_eangle(0);
+			  //servo_set_eangle(0);
 			  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 		}
 		else{
-		  servo_set_eangle(180);
+		  //servo_set_eangle(180);
 		  HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
 		}
 
@@ -49,22 +50,47 @@ void debug_screen(){
 }
 
 void fight(){
+	servo_set_eangle(20);
 	display_fill(DISPLAY_COLOR_BLACK);
 	display_bitmap(0, 0, DISPLAY_COLOR_WHITE, bitmap_konar_vertical_128_64, 128, 64);
 	display_render();
-	while(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == 1){
-		motor_L_set_direction(FORWARD);
-		motor_R_set_direction(FORWARD);
+
+	int8_t speed_diff = 50;
+
+	motor_L_set_direction(FORWARD);
+	motor_R_set_direction(FORWARD);
+
+	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == 1)
+		speed_diff = -50;
+
+	motor_L_set_speed(50 + speed_diff);
+	motor_R_set_speed(50 - speed_diff);
+	VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
+	VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+	while((TOF3.RangingData.RangeMilliMeter > SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter > SENSING_DISTANCE)){
+		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
+		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+	}
+
+	motor_L_set_speed(100);
+	motor_R_set_speed(100);
+
+	while(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 1){
+
+		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
+		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 		motor_L_set_speed(50);
 		motor_R_set_speed(50);
 
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-		if(TOF3.RangingData.RangeStatus == 0){
+		//if(TOF3.RangingData.RangeStatus == 0){
 			if(TOF3.RangingData.RangeMilliMeter < 200)
 				HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			else
 				HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
-		}
-
+		//}
 	}
+
+	motor_L_set_speed(0);
+	motor_R_set_speed(0);
 }
