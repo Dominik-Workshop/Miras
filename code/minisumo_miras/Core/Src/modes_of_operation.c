@@ -38,7 +38,12 @@ void debug_screen(){
 
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 		//if(TOF4.RangingData.RangeStatus == 0){
-				display_printf(72, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF4.RangingData.RangeMilliMeter);
+			display_printf(72, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF4.RangingData.RangeMilliMeter);
+		//}
+
+		//VL53L0X_PerformSingleRangingMeasurement(&(TOF5.vl53l0x_c), &(TOF5.RangingData));
+		//if(TOF5.RangingData.RangeStatus == 0){
+				//display_printf(100, 30, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF5.RangingData.RangeMilliMeter);
 		//}
 
 		display_render();
