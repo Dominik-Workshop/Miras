@@ -166,8 +166,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin))
-		fight();
+	if(HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == 1)
+		wait_for_fight_start();
 	else
 		debug_screen();
     /* USER CODE END WHILE */

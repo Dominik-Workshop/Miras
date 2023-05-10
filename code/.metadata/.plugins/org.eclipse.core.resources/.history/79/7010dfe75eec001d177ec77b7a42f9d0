@@ -1,5 +1,0 @@
-#include "modes_of_operation.h"
-
-void debug_screen(){
-
-}

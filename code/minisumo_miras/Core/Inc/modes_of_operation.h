@@ -17,6 +17,7 @@
 #include "battery.h"
 #include "motors.h"
 #include "vl53l0_init.h"
+#include "sensors.h"
 
 extern Battery battery;
 extern uint32_t values_adc[4];
@@ -33,6 +34,7 @@ extern uint8_t isApertureSpads;
 extern uint8_t VhvSettings;
 extern uint8_t PhaseCal;
 
+void wait_for_fight_start();
 void fight();
 void debug_screen();
 

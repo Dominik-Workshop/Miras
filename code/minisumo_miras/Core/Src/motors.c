@@ -17,6 +17,10 @@
  * @param speed 0-100
  */
 void motor_L_set_speed(uint8_t speed){
+	if(speed < 0)
+		speed = 0;
+	else if(speed > 100)
+		speed = 100;
 	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, speed);
 }
 
@@ -26,6 +30,10 @@ void motor_L_set_speed(uint8_t speed){
  * @param speed 0-100
  */
 void motor_R_set_speed(uint8_t speed){
+	if(speed < 0)
+		speed = 0;
+	else if(speed > 100)
+		speed = 100;
 	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, speed);
 }
 

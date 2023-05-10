@@ -5,6 +5,7 @@
 "./Core/Src/modes_of_operation.o"
 "./Core/Src/motors.o"
 "./Core/Src/moving_average.o"
+"./Core/Src/sensors.o"
 "./Core/Src/sprites.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_it.o"
