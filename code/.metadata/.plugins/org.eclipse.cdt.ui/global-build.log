@@ -4539,3 +4539,157 @@ Finished building: default.size.stdout
  
 Finished building: minisumo_miras.list
  
+00:23:43 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74208	   1192	   5088	  80488	  13a68	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:28:58 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/modes_of_operation.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/modes_of_operation.d" -MT"Core/Src/modes_of_operation.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/modes_of_operation.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74256	   1192	   5088	  80536	  13a98	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:31:11 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74272	   1192	   5088	  80552	  13aa8	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:31:42 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74256	   1192	   5088	  80536	  13a98	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:32:46 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74256	   1192	   5088	  80536	  13a98	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:40:09 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74272	   1192	   5088	  80552	  13aa8	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:42:13 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:44:25 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:53:12 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+00:53:26 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-size   minisumo_miras.elf 
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+01:01:39 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/core/inc" -I"E:/projects/minisumo/code/minisumo_miras/Drivers/VL53L0X/platform/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "minisumo_miras.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\projects\minisumo\code\minisumo_miras\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="minisumo_miras.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: minisumo_miras.elf
+ 
+arm-none-eabi-size   minisumo_miras.elf 
+arm-none-eabi-objdump -h -S  minisumo_miras.elf  > "minisumo_miras.list"
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 
+Finished building: minisumo_miras.list
+ 
+01:01:50 **** Incremental Build of configuration Debug for project minisumo_miras ****
+make -j12 all 
+arm-none-eabi-size   minisumo_miras.elf 
+   text	   data	    bss	    dec	    hex	filename
+  74280	   1192	   5088	  80560	  13ab0	minisumo_miras.elf
+Finished building: default.size.stdout
+ 

@@ -172,8 +172,7 @@ int main(void)
 
   HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_SET); // Enable XSHUT
   tof_vl53l0_init(&TOF4.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
-
-  HAL_GPIO_WritePin(TOF_X5_GPIO_Port, TOF_X5_Pin, GPIO_PIN_SET); // Enable XSHUT
+  //HAL_GPIO_WritePin(TOF_X5_GPIO_Port, TOF_X5_Pin, GPIO_PIN_SET); // Enable XSHUT
 
 
   //tof_vl53l0_init(&TOF5.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);

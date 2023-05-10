@@ -31,11 +31,6 @@ void debug_screen(){
 		display_printf(104, 00, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[KTIR_FRONT_RIGHT]);
 		display_printf(54, 56, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[KTIR_BACK]);
 
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF2.vl53l0x_c), &(TOF2.RangingData));
-		//if(TOF2.RangingData.RangeStatus == 0){
-			display_printf(10, 30, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF2.RangingData.RangeMilliMeter);
-		//}
-
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
 		//if(TOF3.RangingData.RangeStatus == 0){
 			display_printf(32, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF3.RangingData.RangeMilliMeter);
