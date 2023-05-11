@@ -135,48 +135,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
   HAL_ADC_Start_DMA(&hadc1, values_adc, 4);
 
-  TOF2.vl53l0x_c.I2cHandle = &hi2c1;
-  TOF2.vl53l0x_c.I2cDevAddr = 0x52;
-
-  TOF3.vl53l0x_c.I2cHandle = &hi2c1;
-  TOF3.vl53l0x_c.I2cDevAddr = 0x52;
-
-  TOF4.vl53l0x_c.I2cHandle = &hi2c3;
-  TOF4.vl53l0x_c.I2cDevAddr = 0x52;
-
-  TOF5.vl53l0x_c.I2cHandle = &hi2c3;
-  TOF5.vl53l0x_c.I2cDevAddr = 0x52;
-
-  HAL_GPIO_WritePin(TOF_X2_GPIO_Port, TOF_X2_Pin, GPIO_PIN_RESET); // Disable XSHUT
-  HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_RESET); // Disable XSHUT
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_RESET); // Disable XSHUT
-  HAL_GPIO_WritePin(TOF_X5_GPIO_Port, TOF_X5_Pin, GPIO_PIN_RESET); // Disable XSHUT
-  HAL_Delay(20);
-  //HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_SET); // Enable XSHUT
-
-
-  HAL_GPIO_WritePin(TOF_X2_GPIO_Port, TOF_X2_Pin, GPIO_PIN_SET); // Enable XSHUT
-  HAL_Delay(50);
-
-  tof_vl53l0_init(&TOF2.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
-  VL53L0X_SetDeviceAddress(&(TOF2.vl53l0x_c), 0x62);
-  HAL_Delay(50);
-  TOF2.vl53l0x_c.I2cDevAddr = 0x62;
-  HAL_Delay(50);
-
-
-  //HAL_GPIO_WritePin(TOF_X2_GPIO_Port, TOF_X2_Pin, GPIO_PIN_SET); // Enable XSHUT
-  HAL_GPIO_WritePin(TOF_X3_GPIO_Port, TOF_X3_Pin, GPIO_PIN_SET); // Enable XSHUT
-  tof_vl53l0_init(&TOF3.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
-
-
-  HAL_GPIO_WritePin(TOF_X4_GPIO_Port, TOF_X4_Pin, GPIO_PIN_SET); // Enable XSHUT
-  tof_vl53l0_init(&TOF4.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
-
-  HAL_GPIO_WritePin(TOF_X5_GPIO_Port, TOF_X5_Pin, GPIO_PIN_SET); // Enable XSHUT
-
-
-  //tof_vl53l0_init(&TOF5.vl53l0x_c, &VhvSettings , &PhaseCal, &refSpadCount, &isApertureSpads);
+  TOF_VL53L0X_init_all();
 
   display_init();
   display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
@@ -447,7 +406,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 15;
+  htim2.Init.Prescaler = 99;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 19999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
