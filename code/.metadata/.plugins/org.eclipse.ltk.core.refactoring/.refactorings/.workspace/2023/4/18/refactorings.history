@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;minisumo_miras/Core/Src/VL53L0X.c&apos;" deleteContents="false" description="Delete resource &apos;minisumo_miras/Core/Src/VL53L0X.c&apos;" element1="/minisumo_miras/Core/Src/VL53L0X.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1682897935613"/>&#x0A;<refactoring comment="Delete resource &apos;minisumo_miras/Core/Inc/VL53L0X.h&apos;" deleteContents="false" description="Delete resource &apos;minisumo_miras/Core/Inc/VL53L0X.h&apos;" element1="/minisumo_miras/Core/Inc/VL53L0X.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1682897942558"/>
-</session>

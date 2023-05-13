@@ -10,11 +10,11 @@
  */
 
 #define SENSING_DISTANCE 		400	//mm
-#define DIRECT_CONTACT_DISTANCE 150	//mm
+#define DIRECT_CONTACT_DISTANCE 230	//mm
 #define LINE_BORDER 			3900
 #define TURNING_TIME 	 		5	//ms
 #define BACKING_UP_TIME  		100	//ms
-#define MAX_SPEED				50	//0 - 100
+#define MAX_SPEED				60	//0 - 100
 
 #include "modes_of_operation.h"
 
@@ -86,8 +86,10 @@ void fight(){
 	while((TOF3.RangingData.RangeMilliMeter > SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter > SENSING_DISTANCE)){
 		if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 			break;
+		check_line();
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+
 	}
 
 	motor_L_set_speed(MAX_SPEED);
@@ -117,29 +119,31 @@ void fight(){
 		}
 		//left center is detecting
 		else if(TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(30 + TOF3.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
-			motor_R_set_speed(70);
+			motor_L_set_speed(0 + TOF3.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
+			motor_R_set_speed(80);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			check_line();
 		}
 		//right center is detecting
 		else if(TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(70);
-			motor_R_set_speed(30 + TOF4.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
+			motor_L_set_speed(80);
+			motor_R_set_speed(0 + TOF4.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			check_line();
 		}
 		//left is detecting
 		else if(TOF2.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(TOF2.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
+			motor_L_set_direction(BACKWARD);
+			motor_L_set_speed(TOF2.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
 			motor_R_set_speed(80);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			check_line();
 		}
 		//right is detecting
 		else if(TOF5.RangingData.RangeMilliMeter < SENSING_DISTANCE){
+			motor_R_set_direction(BACKWARD);
 			motor_L_set_speed(80);
-			motor_R_set_speed(TOF5.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
+			motor_R_set_speed(TOF5.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			check_line();
 		}

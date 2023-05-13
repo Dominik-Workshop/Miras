@@ -102,4 +102,4 @@ void TOF_VL53L0X_measurement_setup(VL53L0X_Dev_t * Dev, uint8_t *pVhvSettings, u
   VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_PRE_RANGE, 18);
   VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_FINAL_RANGE, 14);
 
-}
+ }
