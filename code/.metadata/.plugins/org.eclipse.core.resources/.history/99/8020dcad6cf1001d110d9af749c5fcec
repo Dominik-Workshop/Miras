@@ -12,8 +12,8 @@
 #define SENSING_DISTANCE 		400	//mm
 #define DIRECT_CONTACT_DISTANCE 150	//mm
 #define LINE_BORDER 			3900
-#define TURNING_TIME 	 		5	//ms
-#define BACKING_UP_TIME  		100	//ms
+#define TURNING_TIME 	 		10	//ms
+#define BACKING_UP_TIME  		300	//ms
 #define MAX_SPEED				50	//0 - 100
 
 #include "modes_of_operation.h"
@@ -178,7 +178,9 @@ void check_line(){
 			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
 				break;
-			//HAL_Delay(1);
+			if(i == TURNING_TIME)
+				break;
+			HAL_Delay(1);
 		}
 	}
 	if(values_adc[KTIR_FRONT_RIGHT] < LINE_BORDER){
@@ -191,7 +193,7 @@ void check_line(){
 				break;
 			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 				break;
-			//HAL_Delay(1);
+			HAL_Delay(1);
 		}
 		motor_R_set_direction(FORWARD);
 		for(int i = 0; i < TURNING_TIME; ++i){
@@ -202,7 +204,9 @@ void check_line(){
 			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
 				break;
-			//HAL_Delay(1);
+			if(i == TURNING_TIME)
+				break;
+			HAL_Delay(1);
 		}
 	}
 }

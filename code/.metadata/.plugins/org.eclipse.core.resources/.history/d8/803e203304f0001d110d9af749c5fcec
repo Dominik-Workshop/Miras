@@ -9,12 +9,11 @@
  *
  */
 
-#define SENSING_DISTANCE 		400	//mm
-#define DIRECT_CONTACT_DISTANCE 150	//mm
-#define LINE_BORDER 			3900
-#define TURNING_TIME 	 		5	//ms
-#define BACKING_UP_TIME  		100	//ms
-#define MAX_SPEED				50	//0 - 100
+#define SENSING_DISTANCE 400	//mm
+#define LINE_BORDER 3950
+#define TURNING_TIME 600		//ms
+#define BACKING_UP_TIME 100		//ms
+#define MAX_SPEED		 80		//0 - 100
 
 #include "modes_of_operation.h"
 
@@ -71,16 +70,16 @@ void fight(){
 	servo_set_eangle(20);
 	HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
 
-	int8_t speed_diff = 30;
+	int8_t speed_diff = 50;
 
 	motor_L_set_direction(FORWARD);
 	motor_R_set_direction(FORWARD);
 
 	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin))
-		speed_diff = -30;
+		speed_diff = -50;
 
-	motor_L_set_speed(40 - speed_diff);
-	motor_R_set_speed(40 + speed_diff);
+	motor_L_set_speed(50 + speed_diff);
+	motor_R_set_speed(50 - speed_diff);
 	VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
 	VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 	while((TOF3.RangingData.RangeMilliMeter > SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter > SENSING_DISTANCE)){
@@ -94,115 +93,100 @@ void fight(){
 	motor_R_set_speed(MAX_SPEED);
 
 	while(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 1){
+		motor_L_set_direction(FORWARD);
+		motor_R_set_direction(FORWARD);
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF2.vl53l0x_c), &(TOF2.RangingData));
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 		VL53L0X_PerformSingleRangingMeasurement(&(TOF5.vl53l0x_c), &(TOF5.RangingData));
-		motor_L_set_direction(FORWARD);
-		motor_R_set_direction(FORWARD);
-		HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 
-		//both are detecting far
+
+		//both are detecting
 		if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE)){
-			motor_L_set_speed(MAX_SPEED);
-			motor_R_set_speed(MAX_SPEED);
-			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-			check_line();
-		}
-		//both are detecting close
-		if((TOF3.RangingData.RangeMilliMeter < DIRECT_CONTACT_DISTANCE) && (TOF4.RangingData.RangeMilliMeter < DIRECT_CONTACT_DISTANCE)){
 			motor_L_set_speed(100);
 			motor_R_set_speed(100);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 		}
 		//left center is detecting
 		else if(TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(30 + TOF3.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
-			motor_R_set_speed(70);
+			motor_L_set_speed(30 + TOF3.RangingData.RangeMilliMeter / (SENSING_DISTANCE/100));
+			motor_R_set_speed(100);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-			check_line();
 		}
 		//right center is detecting
 		else if(TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(70);
-			motor_R_set_speed(30 + TOF4.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
+			motor_L_set_speed(100);
+			motor_R_set_speed(30 + TOF4.RangingData.RangeMilliMeter / (SENSING_DISTANCE/100));
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-			check_line();
 		}
 		//left is detecting
 		else if(TOF2.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(TOF2.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
-			motor_R_set_speed(80);
+			motor_L_set_speed(TOF2.RangingData.RangeMilliMeter / (SENSING_DISTANCE/100));
+			motor_R_set_speed(100);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-			check_line();
 		}
 		//right is detecting
 		else if(TOF5.RangingData.RangeMilliMeter < SENSING_DISTANCE){
-			motor_L_set_speed(80);
-			motor_R_set_speed(TOF5.RangingData.RangeMilliMeter / (SENSING_DISTANCE/80));
+			motor_L_set_speed(100);
+			motor_R_set_speed(TOF5.RangingData.RangeMilliMeter / (SENSING_DISTANCE/100));
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
-			check_line();
 		}
 		//none are detecting
 		else if((TOF3.RangingData.RangeMilliMeter > SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter > SENSING_DISTANCE)){
-			motor_L_set_speed(MAX_SPEED);
-			motor_R_set_speed(MAX_SPEED);
+			motor_L_set_speed(MAX_SPEED/2);
+			motor_R_set_speed(MAX_SPEED/2);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
-			check_line();
+
+			if(values_adc[KTIR_FRONT_LEFT] < LINE_BORDER){
+				motor_L_set_direction(BACKWARD);
+				motor_R_set_direction(BACKWARD);
+				motor_L_set_speed(MAX_SPEED);
+				motor_R_set_speed(MAX_SPEED);
+				for(int i = 0; i < BACKING_UP_TIME; ++i){
+					if(values_adc[KTIR_BACK] < LINE_BORDER)
+						break;
+					if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
+						break;
+					HAL_Delay(1);
+				}
+				motor_L_set_direction(FORWARD);
+				for(int i = 0; i < TURNING_TIME; ++i){
+					if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
+						break;
+					VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
+					VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+					if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
+						break;
+					HAL_Delay(1);
+				}
+			}
+			if(values_adc[KTIR_FRONT_RIGHT] < LINE_BORDER){
+				motor_L_set_direction(BACKWARD);
+				motor_R_set_direction(BACKWARD);
+				motor_L_set_speed(MAX_SPEED);
+				motor_R_set_speed(MAX_SPEED);
+				for(int i = 0; i < BACKING_UP_TIME; ++i){
+					if(values_adc[KTIR_BACK] < LINE_BORDER)
+						break;
+					if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
+						break;
+					HAL_Delay(1);
+				}
+				motor_R_set_direction(FORWARD);
+				for(int i = 0; i < TURNING_TIME; ++i){
+					if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
+						break;
+					VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
+					VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+					if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
+						break;
+					HAL_Delay(1);
+				}
+			}
 		}
 	}
 
 	motor_L_set_speed(0);
 	motor_R_set_speed(0);
 	HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_RESET);
-}
-
-void check_line(){
-	if(values_adc[KTIR_FRONT_LEFT] < LINE_BORDER){
-		motor_L_set_direction(BACKWARD);
-		motor_R_set_direction(BACKWARD);
-		motor_L_set_speed(MAX_SPEED);
-		motor_R_set_speed(MAX_SPEED);
-		for(int i = 0; i < BACKING_UP_TIME; ++i){
-			if(values_adc[KTIR_BACK] < LINE_BORDER)
-				break;
-			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
-				break;
-			HAL_Delay(1);
-		}
-		motor_L_set_direction(FORWARD);
-		for(int i = 0; i < TURNING_TIME; ++i){
-			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
-				break;
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
-				break;
-			//HAL_Delay(1);
-		}
-	}
-	if(values_adc[KTIR_FRONT_RIGHT] < LINE_BORDER){
-		motor_L_set_direction(BACKWARD);
-		motor_R_set_direction(BACKWARD);
-		motor_L_set_speed(MAX_SPEED);
-		motor_R_set_speed(MAX_SPEED);
-		for(int i = 0; i < BACKING_UP_TIME; ++i){
-			if(values_adc[KTIR_BACK] < LINE_BORDER)
-				break;
-			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
-				break;
-			//HAL_Delay(1);
-		}
-		motor_R_set_direction(FORWARD);
-		for(int i = 0; i < TURNING_TIME; ++i){
-			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, 0);
-			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
-				break;
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
-				break;
-			//HAL_Delay(1);
-		}
-	}
 }

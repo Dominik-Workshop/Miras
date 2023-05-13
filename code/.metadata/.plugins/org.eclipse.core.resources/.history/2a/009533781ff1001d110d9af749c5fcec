@@ -37,6 +37,5 @@ extern uint8_t PhaseCal;
 void wait_for_fight_start();
 void fight();
 void debug_screen();
-void check_line();
 
 #endif
