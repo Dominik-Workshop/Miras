@@ -53,6 +53,7 @@ I2C_HandleTypeDef hi2c3;
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim10;
 
 UART_HandleTypeDef huart2;
 
@@ -84,6 +85,7 @@ static void MX_I2C2_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM10_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -129,6 +131,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
@@ -136,6 +139,7 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, values_adc, 4);
 
   TOF_VL53L0X_init_all();
+  HAL_TIM_Base_Start_IT(&htim10);
 
   display_init();
   display_printf(15, 20, DISPLAY_COLOR_WHITE, display_font_7x10, "Miras minisumo");
@@ -509,6 +513,37 @@ static void MX_TIM3_Init(void)
 }
 
 /**
+  * @brief TIM10 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM10_Init(void)
+{
+
+  /* USER CODE BEGIN TIM10_Init 0 */
+
+  /* USER CODE END TIM10_Init 0 */
+
+  /* USER CODE BEGIN TIM10_Init 1 */
+
+  /* USER CODE END TIM10_Init 1 */
+  htim10.Instance = TIM10;
+  htim10.Init.Prescaler = 10000;
+  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim10.Init.Period = 400;
+  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM10_Init 2 */
+
+  /* USER CODE END TIM10_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -629,7 +664,22 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	if(htim->Instance == TIM10){
+		VL53L0X_GetRangingMeasurementData(&TOF2.vl53l0x_c, &TOF2.RangingData);
+		VL53L0X_ClearInterruptMask(&TOF2.vl53l0x_c, VL53L0X_REG_SYSTEM_INTERRUPT_GPIO_NEW_SAMPLE_READY);
 
+		VL53L0X_GetRangingMeasurementData(&TOF3.vl53l0x_c, &TOF3.RangingData);
+		VL53L0X_ClearInterruptMask(&TOF3.vl53l0x_c, VL53L0X_REG_SYSTEM_INTERRUPT_GPIO_NEW_SAMPLE_READY);
+
+		VL53L0X_GetRangingMeasurementData(&TOF4.vl53l0x_c, &TOF4.RangingData);
+		VL53L0X_ClearInterruptMask(&TOF4.vl53l0x_c, VL53L0X_REG_SYSTEM_INTERRUPT_GPIO_NEW_SAMPLE_READY);
+
+		VL53L0X_GetRangingMeasurementData(&TOF5.vl53l0x_c, &TOF5.RangingData);
+		VL53L0X_ClearInterruptMask(&TOF5.vl53l0x_c, VL53L0X_REG_SYSTEM_INTERRUPT_GPIO_NEW_SAMPLE_READY);
+
+	}
+}
 /* USER CODE END 4 */
 
 /**

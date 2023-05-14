@@ -10,9 +10,9 @@
  */
 
 #define SENSING_DISTANCE 		400	//mm
-#define DIRECT_CONTACT_DISTANCE 230	//mm
+#define DIRECT_CONTACT_DISTANCE 150	//mm
 #define LINE_BORDER 			3900
-#define TURNING_TIME 	 		5	//ms
+#define TURNING_TIME 	 		200	//ms
 #define BACKING_UP_TIME  		100	//ms
 #define MAX_SPEED				60	//0 - 100
 
@@ -32,25 +32,21 @@ void debug_screen(){
 		display_printf(104, 00, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[KTIR_FRONT_RIGHT]);
 		display_printf(54, 56, DISPLAY_COLOR_WHITE, display_font_6x8, "%d", (int) values_adc[KTIR_BACK]);
 
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF2.vl53l0x_c), &(TOF2.RangingData));
-		//if(TOF2.RangingData.RangeStatus == 0){
+		if(TOF2.RangingData.RangeStatus == 0){
 			display_printf(10, 30, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF2.RangingData.RangeMilliMeter);
-		//}
+		}
 
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-		//if(TOF3.RangingData.RangeStatus == 0){
+		if(TOF3.RangingData.RangeStatus == 0){
 			display_printf(32, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF3.RangingData.RangeMilliMeter);
-		//}
+		}
 
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-		//if(TOF4.RangingData.RangeStatus == 0){
+		if(TOF4.RangingData.RangeStatus == 0){
 			display_printf(72, 20, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF4.RangingData.RangeMilliMeter);
-		//}
+		}
 
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF5.vl53l0x_c), &(TOF5.RangingData));
-		//if(TOF5.RangingData.RangeStatus == 0){
+		if(TOF5.RangingData.RangeStatus == 0){
 			display_printf(100, 30, DISPLAY_COLOR_WHITE, display_font_6x8, "%i", TOF5.RangingData.RangeMilliMeter);
-		//}
+		}
 
 		display_render();
 	}
@@ -81,28 +77,20 @@ void fight(){
 
 	motor_L_set_speed(40 - speed_diff);
 	motor_R_set_speed(40 + speed_diff);
-	VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-	VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
+
 	while((TOF3.RangingData.RangeMilliMeter > SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter > SENSING_DISTANCE)){
 		if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 			break;
 		check_line();
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-
 	}
 
 	motor_L_set_speed(MAX_SPEED);
 	motor_R_set_speed(MAX_SPEED);
 
 	while(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 1){
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF2.vl53l0x_c), &(TOF2.RangingData));
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
-		VL53L0X_PerformSingleRangingMeasurement(&(TOF5.vl53l0x_c), &(TOF5.RangingData));
+
 		motor_L_set_direction(FORWARD);
 		motor_R_set_direction(FORWARD);
-		HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 
 		//both are detecting far
 		if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) && (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE)){
@@ -132,7 +120,7 @@ void fight(){
 			check_line();
 		}
 		//left is detecting
-		else if(TOF2.RangingData.RangeMilliMeter < SENSING_DISTANCE){
+		else if((TOF2.RangingData.RangeMilliMeter < SENSING_DISTANCE) && (TOF2.RangingData.RangeStatus == 0)){
 			motor_L_set_direction(BACKWARD);
 			motor_L_set_speed(TOF2.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
 			motor_R_set_speed(80);
@@ -154,6 +142,7 @@ void fight(){
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_RESET);
 			check_line();
 		}
+		HAL_Delay(1);
 	}
 
 	motor_L_set_speed(0);
@@ -178,11 +167,9 @@ void check_line(){
 		for(int i = 0; i < TURNING_TIME; ++i){
 			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 				break;
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
 				break;
-			//HAL_Delay(1);
+			HAL_Delay(1);
 		}
 	}
 	if(values_adc[KTIR_FRONT_RIGHT] < LINE_BORDER){
@@ -195,18 +182,16 @@ void check_line(){
 				break;
 			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 				break;
-			//HAL_Delay(1);
+			HAL_Delay(1);
 		}
 		motor_R_set_direction(FORWARD);
 		for(int i = 0; i < TURNING_TIME; ++i){
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, 0);
 			if(HAL_GPIO_ReadPin(starter_GPIO_Port, starter_Pin) == 0)
 				break;
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF3.vl53l0x_c), &(TOF3.RangingData));
-			VL53L0X_PerformSingleRangingMeasurement(&(TOF4.vl53l0x_c), &(TOF4.RangingData));
 			if((TOF3.RangingData.RangeMilliMeter < SENSING_DISTANCE) || (TOF4.RangingData.RangeMilliMeter < SENSING_DISTANCE))
 				break;
-			//HAL_Delay(1);
+			HAL_Delay(1);
 		}
 	}
 }
