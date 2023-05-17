@@ -9,12 +9,13 @@
  *
  */
 
-#define SENSING_DISTANCE 		400	//mm
-#define DIRECT_CONTACT_DISTANCE 150	//mm
-#define LINE_BORDER 			3900
-#define TURNING_TIME 	 		200	//ms
-#define BACKING_UP_TIME  		100	//ms
-#define MAX_SPEED				60	//0 - 100
+#define SENSING_DISTANCE 			400	//mm
+#define DIRECT_CONTACT_DISTANCE 	150	//mm
+#define STUCK_IN_CORNER_DISTANCE 	80	//mm
+#define LINE_BORDER 				3900
+#define TURNING_TIME 	 			200	//ms
+#define BACKING_UP_TIME  			100	//ms
+#define MAX_SPEED					60	//0 - 100
 
 #include "modes_of_operation.h"
 
@@ -132,6 +133,22 @@ void fight(){
 			motor_R_set_direction(BACKWARD);
 			motor_L_set_speed(80);
 			motor_R_set_speed(TOF5.RangingData.RangeMilliMeter / (SENSING_DISTANCE/40));
+			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
+			check_line();
+		}
+		//left is detecting close
+		else if((TOF2.RangingData.RangeMilliMeter < STUCK_IN_CORNER_DISTANCE) && (TOF2.RangingData.RangeStatus == 0)){
+			motor_L_set_direction(BACKWARD);
+			motor_L_set_speed(100);
+			motor_R_set_speed(100);
+			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
+			check_line();
+		}
+		//right is detecting close
+		else if((TOF5.RangingData.RangeMilliMeter < STUCK_IN_CORNER_DISTANCE) && (TOF5.RangingData.RangeStatus == 0)){
+			motor_R_set_direction(BACKWARD);
+			motor_L_set_speed(100);
+			motor_R_set_speed(100);
 			HAL_GPIO_WritePin(user_LED_GPIO_Port, user_LED_Pin, GPIO_PIN_SET);
 			check_line();
 		}
