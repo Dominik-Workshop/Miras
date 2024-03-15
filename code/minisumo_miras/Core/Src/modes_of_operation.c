@@ -69,12 +69,25 @@ void fight(){
 	HAL_GPIO_WritePin(LS_ON_GPIO_Port, LS_ON_Pin, GPIO_PIN_SET);
 
 	int8_t speed_diff = 30;
+	int8_t rotation_time = 120;
+
+	motor_L_set_speed(100);
+	motor_R_set_speed(100);
+
+	motor_L_set_direction(BACKWARD);
+	motor_R_set_direction(FORWARD);
+
+	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin)){
+		speed_diff = -30;
+		motor_L_set_direction(FORWARD);
+		motor_R_set_direction(BACKWARD);
+		rotation_time = 100;
+	}
+
+	HAL_Delay(rotation_time);
 
 	motor_L_set_direction(FORWARD);
 	motor_R_set_direction(FORWARD);
-
-	if(HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin))
-		speed_diff = -30;
 
 	motor_L_set_speed(40 - speed_diff);
 	motor_R_set_speed(40 + speed_diff);
