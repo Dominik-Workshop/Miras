@@ -45,9 +45,9 @@ The robot is powered by two **N20** motors.
 
 ## Used Tools
 
-<img src="images/logos/Eagle.png" align="center" height="64"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-<img src="images/logos/Inventor.png" align="center"  height="64"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-<img src="images/logos/STM32CubeIDE.png" align="center" height="64">
+- [Autodesk EAGLE](https://www.autodesk.com/products/eagle/) - Schematic and PCB design
+- [Autodesk Inventor](https://www.autodesk.com/products/inventor/) - 3D modeling
+- [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html) - STM32 firmware development (build/flash/debug)
 
 ## Authors
 
